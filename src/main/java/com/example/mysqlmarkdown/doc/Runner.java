@@ -16,9 +16,9 @@ import java.util.List;
  */
 public class Runner {
 
-    private final static String JDBC_URL = "jdbc:mysql://172.16.8.10:3306/apijson";
+    private final static String JDBC_URL = "jdbc:mysql://localhost:3306/apijson";
     private final static String ACCOUNT = "root";
-    private final static String PWD = "jiaojun123";
+    private final static String PWD = "root";
     private final static String TITLE = "数据库字典";
 
 
