@@ -1,4 +1,4 @@
-package com.example.mysqlmarkdown.doc;
+package com.example.mysql.doc;
 
 import java.util.List;
 

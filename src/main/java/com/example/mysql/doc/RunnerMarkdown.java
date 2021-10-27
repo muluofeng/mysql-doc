@@ -1,28 +1,55 @@
-package com.example.mysqlmarkdown.doc;
+package com.example.mysql.doc;
 
 import org.apache.commons.io.FileUtils;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * 读取mysql数据库下表的结构信息
  */
-public class Runner {
+public class RunnerMarkdown {
 
-    private final static String JDBC_URL = "jdbc:mysql://localhost:3306/apijson";
-    private final static String ACCOUNT = "root";
-    private final static String PWD = "root";
-    private final static String TITLE = "数据库字典";
 
+    private static String IP;
+    private static String PORT;
+    private static String DBANAME;
+    private static String USERNAME;
+    private static String PWD;
+    private static String TITLE;
+    private static String JDBC_URL;
 
     public static void main(String[] args) throws Exception {
+
+        Properties properties = new Properties();
+        // 使用ClassLoader加载properties配置文件生成对应的输入流
+        InputStream in = RunnerWord.class.getClassLoader().getResourceAsStream("config.properties");
+        // 使用properties对象加载输入流
+        BufferedReader bf = new BufferedReader(new InputStreamReader(in,"UTF-8"));
+        properties.load(bf);
+
+        //获取key对应的value值
+        String format = String.format("jdbc:mysql://%s:%s/%s?allowMultiQueries=true&useUnicode=true&useSSL=false&zeroDateTimeBehavior=convertToNull",
+                properties.getProperty("ip"), properties.getProperty("port"), properties.getProperty("dbname"));
+
+        IP = properties.getProperty("ip");
+        PORT = properties.getProperty("port");
+        DBANAME = properties.getProperty("dbname");
+        JDBC_URL = format;
+        USERNAME = properties.getProperty("username");
+        PWD = properties.getProperty("password");
+        TITLE = properties.getProperty("title");
+
 
         // 获取数据库下的所有表名称
         List<Table> tables = getAllTableName();
@@ -101,7 +128,7 @@ public class Runner {
     private static Connection getMySQLConnection() throws Exception {
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection conn = DriverManager.getConnection(JDBC_URL,
-                ACCOUNT, PWD);
+                USERNAME, PWD);
         return conn;
     }
 

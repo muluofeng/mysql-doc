@@ -1,4 +1,4 @@
-package com.example.mysqlmarkdown.doc;
+package com.example.mysql.doc;
 
 public class Column {
     // 数据库字段名称
