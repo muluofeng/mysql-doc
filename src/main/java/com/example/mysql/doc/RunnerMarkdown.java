@@ -58,15 +58,15 @@ public class RunnerMarkdown {
         // 获得表中所有字段信息
         buildColumns(tables);
         // 写文件
-        write(tables);
+        write(tables,TITLE);
     }
 
     /**
      * 写文件
      */
-    private static void write(List<Table> tables) {
+    private static void write(List<Table> tables,String title) {
 
-        String path = System.getProperty("user.dir") + "/db.md";
+        String path = System.getProperty("user.dir") + "/"+title+".md";
 
         StringBuffer fileContent = new StringBuffer();
         fileContent.append("## ").append(TITLE).append("\n\n");
