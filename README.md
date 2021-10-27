@@ -1,4 +1,4 @@
-## msyql  生成markdown 数据字典程序
+## msyql  生成 数据字典程序
 
 
 支持：
